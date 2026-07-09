@@ -23,11 +23,8 @@ All instances are derived from two classical CARP benchmarks:
 
 | Folder | Contents |
 |---|---|
-| `gdb_mod/` | 23 CARP-VD instances derived from *gdb* with **proportional** vehicle-dependent costs |
-| `egl_mod/` | 24 CARP-VD instances derived from *egl* with **proportional** vehicle-dependent costs |
 | `gdb_mod_np/` | 23 CARP-VD instances derived from *gdb* with **non-proportional** vehicle-dependent costs |
 | `egl_mod_np/` | 24 CARP-VD instances derived from *egl* with **non-proportional** vehicle-dependent costs |
-| `generar_instancias_np.py` | Generator used to produce the `*_np` sets from the `*_mod` sets (reproducible by seed) |
 
 Each instance consists of two plain-text files:
 
@@ -92,15 +89,6 @@ with open("gdb_mod/gdb19_graph.txt", "rb") as fh:
 
 ## How the instances were generated
 
-### Proportional sets (`gdb_mod/`, `egl_mod/`)
-
-Starting from the original benchmarks, the single-type cost of each edge is
-kept as the type-1 servicing cost (`c1`). Deadheading costs are 30% cheaper
-than servicing (`d = 0.7 c`). Type-2 costs are obtained by scaling the type-1
-costs by a constant factor per instance. Fleet sizes are preserved and
-capacities are modified to obtain a heterogeneous fleet that can still meet
-the total demand.
-
 ### Non-proportional sets (`gdb_mod_np/`, `egl_mod_np/`)
 
 Motivated by municipal solid waste collection, where the cost of operating a
@@ -125,11 +113,6 @@ Each `*_np` folder includes a `manifest.csv` with, for every instance, the
 random seed, the number of edges per street class, and the range of factors
 used.
 
-To regenerate the `*_np` sets (deterministic, same seed = same files):
-
-```bash
-python3 generar_instancias_np.py gdb_mod egl_mod --p-narrow 0.25 --p-restricted 0.05 --seed 2026
-```
 
 ## Citing
 
