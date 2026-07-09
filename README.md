@@ -7,7 +7,7 @@ vehicle that performs the operation.
 
 These instances accompany the paper:
 
-> H.-A. Pérez-Vicente, L. E. Urbán-Rivero, J. Velasco.
+> H.-A. Pérez-Vicente, J. Velasco, L. E. Urbán-Rivero.
 > *A Two-stage Matheuristic for the Capacitated Arc Routing Problem with
 > Vehicle Dependence.* (Submitted, 2026.)
 
