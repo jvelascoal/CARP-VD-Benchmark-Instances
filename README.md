@@ -147,14 +147,6 @@ In `T3` a third, intermediate vehicle type is added: capacity
 largest type. The columns of the first two types are identical to those of the
 main set, so the comparison isolates the effect of the extra type.
 
-## Note on `gdb3`
-
-In an earlier version of these instances, `gdb3_vh.txt` declared capacities
-`{4, 4, 5}` for the three type-1 vehicles, which was inconsistent with the
-uniform capacity per type assumed by the model. It has been corrected to
-`{4, 4, 4}`, and the results reported in the paper correspond to the corrected
-instance.
-
 
 ## Citing
 
