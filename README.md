@@ -25,6 +25,7 @@ All instances are derived from two classical CARP benchmarks:
 |---|---|
 | `gdb_mod_np/` | 23 CARP-VD instances derived from *gdb* with **non-proportional** vehicle-dependent costs |
 | `egl_mod_np/` | 24 CARP-VD instances derived from *egl* with **non-proportional** vehicle-dependent costs |
+| `sensitivity_scenarios/` | Six variants of both sets used in the sensitivity analysis of the paper |
 
 Each instance consists of two plain-text files:
 
@@ -50,21 +51,28 @@ i j c1 d1 c2 d2 q
 | `d2` | deadheading cost for a type-2 vehicle |
 | `q` | demand of the edge (`q = 0` means the edge is not required; only *egl*) |
 
-Example (`gdb_mod/gdb19_graph.txt`, first lines):
+Example (`gdb_mod_np/gdb19_graph.txt`, first lines):
 
 ```
-0 1 4 2.8 4.8 3.36 8
-0 3 3 2.1 3.6 2.52 3
-0 4 1 0.7 1.2 0.84 5
+0 1 9.32 6.52 4 2.8 8
+0 3 2.43 1.7 3 2.1 3
+0 4 0.95 0.66 1 0.7 5
+```
+
+In the three-type scenario (`sensitivity_scenarios/*_T3/`) the format carries
+one cost pair per type, the demand always being the last field:
+
+```
+i j c1 d1 c2 d2 c3 d3 q
 ```
 
 ### `<name>_vh.txt`
 
-First line: `k1 k2`, the number of vehicles of type 1 and type 2.
-Then `k1 + k2` lines, one per vehicle, with its capacity
-(type-1 vehicles first, then type-2).
+First line: `k1 k2`, the number of vehicles of type 1 and type 2 (`k1 k2 k3`
+in the three-type scenario). Then one line per vehicle with its capacity,
+grouped by type and in the same order.
 
-Example (`gdb_mod/gdb19_vh.txt`): two type-1 vehicles of capacity 30 and one
+Example (`gdb_mod_np/gdb19_vh.txt`): two type-1 vehicles of capacity 30 and one
 type-2 vehicle of capacity 21.
 
 ```
@@ -79,7 +87,7 @@ type-2 vehicle of capacity 21.
 ```python
 import networkx as nx
 
-with open("gdb_mod/gdb19_graph.txt", "rb") as fh:
+with open("gdb_mod_np/gdb19_graph.txt", "rb") as fh:
     G = nx.read_edgelist(
         fh, delimiter=" ", nodetype=int,
         data=(("c1", float), ("d1", float),
@@ -113,6 +121,40 @@ Each `*_np` folder includes a `manifest.csv` with, for every instance, the
 random seed, the number of edges per street class, and the range of factors
 used.
 
+### Sensitivity scenarios (`sensitivity_scenarios/`)
+
+Six variants of both sets, each obtained by changing a **single** factor with
+respect to the configuration above and keeping the same random seeds, so that
+the only difference between a scenario and the main set is the parameter under
+study:
+
+| Scenario | Factor modified | Values |
+|---|---|---|
+| `S1` | street-class probabilities | regular 0.85, narrow 0.10, weight-limited 0.05 |
+| `S2` | street-class probabilities | regular 0.55, narrow 0.35, weight-limited 0.10 |
+| `S3` | deadheading ratio | `d = 0.5 c` |
+| `S4` | deadheading ratio | `d = 0.9 c` |
+| `S5` | ranges of `beta` | narrow [2.0, 3.0], weight-limited [5.0, 8.0] |
+| `T3` | number of vehicle types | 3 (see below) |
+
+Folders are named `<set>_<scenario>`, e.g. `gdb_mod_S3/`, `egl_mod_T3/`, and
+each one carries its own `manifest.csv`. All parameters other than the one
+listed keep the values of the main sets.
+
+In `T3` a third, intermediate vehicle type is added: capacity
+`Q3 = round((Q1 + Q2) / 2)`, a single vehicle, and factor
+`beta_med = 1 + (beta - 1) / 2` on each edge, i.e. half the effect of the
+largest type. The columns of the first two types are identical to those of the
+main set, so the comparison isolates the effect of the extra type.
+
+## Note on `gdb3`
+
+In an earlier version of these instances, `gdb3_vh.txt` declared capacities
+`{4, 4, 5}` for the three type-1 vehicles, which was inconsistent with the
+uniform capacity per type assumed by the model. It has been corrected to
+`{4, 4, 4}`, and the results reported in the paper correspond to the corrected
+instance.
+
 
 ## Citing
 
@@ -132,7 +174,7 @@ Baker (1983) for *gdb*, and Eglese & Li (1996) for *egl*.
 
 ## License
 
-The instances and the generator are released under the
+The instances are released under the
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) license: you may
 use, share, and adapt them for any purpose, provided you give appropriate
 credit.
