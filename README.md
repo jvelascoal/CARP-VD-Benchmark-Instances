@@ -1,9 +1,9 @@
 # CARP-VD Benchmark Instances
 
 Benchmark instances for the **Capacitated Arc Routing Problem with Vehicle
-Dependence (CARP-VD)**, a generalization of the CARP in which both the
-servicing cost and the deadheading cost of every edge depend on the type of
-vehicle that performs the operation.
+Dependence (CARP-VD)**, an arc routing problem in which each edge of the
+network carries one servicing cost and one traversal cost for every type of
+vehicle in a heterogeneous fleet.
 
 These instances accompany the paper:
 
@@ -99,11 +99,10 @@ with open("gdb_mod_np/gdb19_graph.txt", "rb") as fh:
 
 ### Non-proportional sets (`gdb_mod_np/`, `egl_mod_np/`)
 
-Motivated by municipal solid waste collection, where the cost of operating a
-street depends on *which* vehicle serves it, each edge is independently
-labeled as one of three street classes, and the vehicle type with the
+Each edge is independently labeled as one of three street classes, reflecting
+how difficult it is for a large truck to work on it, and the vehicle type with the
 **largest capacity** receives an edge-specific cost factor
-`c(large) = beta * c(small)`:
+`c(large) = beta * c(small)`
 
 | Street class | Probability | Factor `beta` |
 |---|---|---|
@@ -117,9 +116,9 @@ unchanged, so feasibility is preserved. Because `beta` is drawn per edge, the
 cost ratio between vehicle types **varies from edge to edge**: no scaling
 factor per vehicle type reproduces these instances.
 
-Each `*_np` folder includes a `manifest.csv` with, for every instance, the
-random seed, the number of edges per street class, and the range of factors
-used.
+Every instance folder ships a `manifest.csv` that records how each file was
+produced: its seed, how many edges fell into each street class, and the
+interval from which `beta` was drawn.
 
 ### Sensitivity scenarios (`sensitivity_scenarios/`)
 
