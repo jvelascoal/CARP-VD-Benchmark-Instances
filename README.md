@@ -155,8 +155,12 @@ If you use these instances, please cite the paper above. BibTeX:
 @article{PerezVicente2026carpvd,
   author  = {P{\'e}rez-Vicente, Hugo-A. and Urb{\'a}n-Rivero, Luis E. and Velasco, Jon{\'a}s},
   title   = {A Two-stage Matheuristic for the Capacitated Arc Routing Problem with Vehicle Dependence},
-  year    = {2026},
-  note    = {Submitted}
+  JOURNAL = {Computation},
+  VOLUME = {14},
+  YEAR = {2026},
+  NUMBER = {8},
+  ARTICLE-NUMBER = {190},
+  DOI = {10.3390/computation14080190}
 }
 ```
 
