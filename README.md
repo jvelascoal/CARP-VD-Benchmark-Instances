@@ -153,8 +153,8 @@ If you use these instances, please cite the paper above. BibTeX:
 
 ```bibtex
 @article{PerezVicente2026carpvd,
-  author  = {Pérez-Vicente, Hugo Alexer and Velasco, Jonás and Urbán-Rivero, Luis E.},
-  title   = {A Two-stage Matheuristic for the Capacitated Arc Routing Problem with Vehicle Dependence},
+  AUTHOR  = {Pérez-Vicente, Hugo Alexer and Velasco, Jonás and Urbán-Rivero, Luis E.},
+  TITLE   = {A Two-stage Matheuristic for the Capacitated Arc Routing Problem with Vehicle Dependence},
   JOURNAL = {Computation},
   VOLUME = {14},
   YEAR = {2026},
