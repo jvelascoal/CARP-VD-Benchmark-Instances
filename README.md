@@ -7,9 +7,9 @@ vehicle in a heterogeneous fleet.
 
 These instances accompany the paper:
 
-> H.-A. Pérez-Vicente, J. Velasco, L. E. Urbán-Rivero.
+> Pérez-Vicente, H.A.; Velasco, J.; Urbán-Rivero, L.E.
 > *A Two-stage Matheuristic for the Capacitated Arc Routing Problem with
-> Vehicle Dependence.* (Submitted, 2026.)
+> Vehicle Dependence.* Computation 2026, 14, 190. https://doi.org/10.3390/computation14080190 
 
 All instances are derived from two classical CARP benchmarks:
 
